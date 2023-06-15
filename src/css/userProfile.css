@@ -1,0 +1,224 @@
+.search-bar {
+	display: flex;
+	align-items: center;
+	text-align: center;
+	width: 50%;
+	height: 40px;
+	margin: 15px;
+	border-radius: 0.3em;
+	background-color: white;
+	padding: 5px 0px 5px 5px;
+	box-shadow: 0 0 10px rgba(0.5, 0.5, 0.5, 0.5);
+}
+
+.search-box {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.search-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 60px;
+	height: 100%;
+	padding: 5px;
+	border-radius: 0em 0.2em 0.2em 0em;
+	transition: ease-in-out 0.3s;
+}
+
+.search {
+	color: black;
+	transition: ease-in-out 0.3s;
+}
+
+.search-icon:hover {
+	cursor: pointer;
+	background-color: #242726;
+
+	.search {
+		color: white;
+		size: 24;
+	}
+}
+
+.search-input {
+	flex-grow: 1;
+	border: none;
+	outline: none;
+	padding: 5px;
+	font-size: 16px;
+}
+
+.search-label {
+	margin-left: 5px;
+	color: whitesmoke;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	justify-content: center;
+	padding: 5px 10px;
+	border-radius: 0em 0.4em 0.4em 0em;
+	border: 1px solid black;
+	background-color: black;
+}
+
+.search-label:hover {
+	cursor: pointer;
+}
+
+.AllCards {
+	display: flex;
+	margin-top: 70px;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+
+.displayCards {
+	width: 300px;
+	height: 300px;
+	margin: 10px;
+}
+
+.display-prod {
+	background-color: black;
+	width: 90%;
+	height: 90%;
+	margin: 10px;
+	padding: 5px;
+	text-align: left;
+	border-radius: 0.5em;
+}
+
+.slick-dots {
+	height: 0px;
+}
+.slick-dots li.slick-active button:before {
+	opacity: 0.8 !important;
+	color: white !important;
+	font-family: 'slick' !important;
+	font-size: 10px !important;
+}
+
+.slick-dots li button:before {
+	opacity: 0.5 !important;
+	color: whitesmoke !important;
+}
+.adds {
+	height: 200px;
+}
+.adds img {
+	width: 100%;
+	height: 100%;
+}
+
+.prod-img-dis {
+	width: 100px;
+	height: 70px;
+}
+
+.display-prod .prod-img {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 10px;
+	width: 100%;
+	height: 80px;
+}
+
+.details {
+	/* background-color: grey;
+	 */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.details button {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 20px;
+}
+
+.prod-details {
+	background-color: grey;
+	height: 20px;
+	width: 100%;
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+.prod-details-des {
+	background-color: grey;
+	height: 50px;
+	width: 100%;
+	margin: 5px 5px;
+	overflow-y: auto;
+}
+
+.order-now {
+	width: 100%;
+	height: 200px;
+}
+.order-now-details {
+	width: 100%;
+	height: 40px;
+}
+.order-now-des {
+	width: 100%;
+	height: 80px;
+	background-color: grey;
+	color: black;
+	overflow-y: auto;
+}
+.order-button {
+	bottom: 2px;
+	top: 80px;
+}
+.order-button button {
+	background-color: green;
+	border-color: transparent;
+	color: white;
+}
+.order-button button:hover {
+	background-color: green;
+	border-color: transparent;
+	color: white;
+	cursor: pointer;
+}
+
+@media screen and (max-width: 640px) {
+	.AllCards {
+		flex-wrap: nowrap;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+	.displayCards {
+		width: 100%;
+		height: 300px;
+		margin: 5px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.display-prod {
+		width: 90%;
+		height: 100%;
+		margin: 10px 0px;
+	}
+	.displayCards {
+		margin: 10px;
+	}
+}
+
+@media screen and (max-width: 950px) {
+	.search-bar {
+		width: 93%;
+	}
+}
