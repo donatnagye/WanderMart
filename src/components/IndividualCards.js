@@ -14,6 +14,10 @@ export default function IndividualCard(props) {
 	const closePopup = () => {
 		setIsOpen(false);
 	};
+	const Order = (e) => {
+		e.preventDefault();
+		
+	};
 	useEffect(() => {
 		setProd(props.props);
 	}, []);
@@ -69,7 +73,13 @@ export default function IndividualCard(props) {
 								}
 							}}
 						></input>
-						<button>Order Now</button>
+						<button
+							onClick={(e) => {
+								Order();
+							}}
+						>
+							Order Now
+						</button>
 						<button
 							style={{
 								backgroundColor: 'yellow',

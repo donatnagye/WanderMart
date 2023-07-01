@@ -10,6 +10,7 @@ import IndividualCard from './IndividualCards';
 export default function SuggestionCards(props) {
 	const [hawkers, setHawkers] = useState([]);
 	const [items, setItems] = useState([]);
+	const [count, setCount] = useState(1);
 	useEffect(() => {
 		setHawkers(props.prop);
 		let arr = items;
@@ -22,6 +23,7 @@ export default function SuggestionCards(props) {
 		});
 		console.log(arr);
 	}, []);
+
 	var settings = {
 		dots: true,
 		infinite: true,
@@ -68,16 +70,18 @@ export default function SuggestionCards(props) {
 	};
 	const itemsPerPage = 20;
 	var len = items.length;
+
 	// Calculate the total number of pages
 	const totalPages = Math.ceil(len / itemsPerPage);
-	console.log(totalPages);
+	console.log(totalPages, count);
+
 	// State to keep track of the current page
 	const [currentPage, setCurrentPage] = useState(1);
 
 	// Calculate the start and end indices for the current page
 	const startIndex = (currentPage - 1) * itemsPerPage;
 	const endIndex = startIndex + itemsPerPage;
-
+ 
 	// Get the entries for the current page
 	const entries = Object.entries(items)
 		?.slice(startIndex, endIndex)
@@ -95,6 +99,7 @@ export default function SuggestionCards(props) {
 	const handlePageChange = (page) => {
 		setCurrentPage(page);
 	};
+
 	// console.log(hawkers);
 	return (
 		<div>
@@ -124,31 +129,45 @@ export default function SuggestionCards(props) {
 				</Slider>
 			</div>
 			<div className="AllCards">
-				{/* {Object.entries(hawkers).map(([key, values]) => {
-					// console.log(values.Items);
-					return Object.entries(values.Items).map(([key2, val]) => {
-						// console.log(val);
-						return (
-							<div className="displayCards">
-								<IndividualCard props={val} />
-							</div>
-						);
-					});
-				})} */}
 				{entries}
 			</div>
-			<div className="Pagination">
-				{Array.from(
-					{ length: totalPages },
-					(_, index) => index + 1
-				).map((page) => (
-					<button
-						key={page}
-						onClick={() => handlePageChange(page)}
-					>
-						{page}
-					</button>
-				))}
+			<div className="Pages">
+				<button
+					onClick={(e) => {
+						if (count > 1) {
+							setCount(count - 1);
+						}
+					}}
+				>
+					{'<'}
+				</button>
+				<div className="Pagination">
+					{Array.from(
+						{
+							length:
+								count * 20 <= totalPages ? 20 : totalPages % 20,
+						},
+						(_, index) => index + 1
+					)
+						.map((page) => (count - 1) * 20 + page)
+						.map((page) => (
+							<button
+								key={page}
+								onClick={() => handlePageChange(page)}
+							>
+								{page}
+							</button>
+						))}
+				</div>
+				<button
+					onClick={(e) => {
+						if (count * 20 < totalPages) {
+							setCount(count + 1);
+						}
+					}}
+				>
+					{'>'}
+				</button>
 			</div>
 		</div>
 	);

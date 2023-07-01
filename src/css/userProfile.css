@@ -108,11 +108,15 @@
 	color: whitesmoke !important;
 }
 .adds {
-	height: 200px;
+	height: 209px;
+	width: 90% !important;
+	justify-content: space-around;
 }
 .adds img {
+	height: 200px;
+	margin: 10px;
 	width: 100%;
-	height: 100%;
+	border-radius: 0.3em;
 }
 
 .prod-img-dis {
@@ -191,7 +195,22 @@
 	color: white;
 	cursor: pointer;
 }
-
+.Pagination {
+	max-width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	overflow-x: hidden;
+}
+.Pages {
+	width: 100%;
+	height: 100px;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
 @media screen and (max-width: 640px) {
 	.AllCards {
 		flex-wrap: nowrap;
