@@ -414,8 +414,6 @@ export default function ProfileCard() {
             })
             setSearch(write);
         }
-
-
     }
     setTimeout(conn, 1000);
     // console.log(items, write);

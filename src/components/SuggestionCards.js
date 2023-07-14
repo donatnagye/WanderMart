@@ -12,6 +12,7 @@ export default function SuggestionCards(props) {
 	const [items, setItems] = useState([]);
 	const [count, setCount] = useState(1);
 	useEffect(() => {
+		// console.log(props.prop);
 		setHawkers(props.prop);
 		let arr = items;
 		Object.entries(props.prop).map(([key, value]) => {
@@ -81,7 +82,7 @@ export default function SuggestionCards(props) {
 	// Calculate the start and end indices for the current page
 	const startIndex = (currentPage - 1) * itemsPerPage;
 	const endIndex = startIndex + itemsPerPage;
- 
+
 	// Get the entries for the current page
 	const entries = Object.entries(items)
 		?.slice(startIndex, endIndex)
@@ -128,9 +129,7 @@ export default function SuggestionCards(props) {
 					</div>
 				</Slider>
 			</div>
-			<div className="AllCards">
-				{entries}
-			</div>
+			<div className="AllCards">{entries}</div>
 			<div className="Pages">
 				<button
 					onClick={(e) => {
@@ -145,11 +144,11 @@ export default function SuggestionCards(props) {
 					{Array.from(
 						{
 							length:
-								count * 20 <= totalPages ? 20 : totalPages % 20,
+								count * 5 <= totalPages ? 5 : totalPages % 5,
 						},
 						(_, index) => index + 1
 					)
-						.map((page) => (count - 1) * 20 + page)
+						.map((page) => (count - 1) * 5 + page)
 						.map((page) => (
 							<button
 								key={page}
@@ -161,7 +160,7 @@ export default function SuggestionCards(props) {
 				</div>
 				<button
 					onClick={(e) => {
-						if (count * 20 < totalPages) {
+						if (count * 5 < totalPages) {
 							setCount(count + 1);
 						}
 					}}

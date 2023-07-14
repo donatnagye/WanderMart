@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Prodimg from '../images/chips.png';
 import Modal from 'react-modal';
+import { backend } from '../urlConfig';
 
 export default function IndividualCard(props) {
 	const [prod, setProd] = useState();
@@ -14,9 +15,47 @@ export default function IndividualCard(props) {
 	const closePopup = () => {
 		setIsOpen(false);
 	};
-	const Order = (e) => {
-		e.preventDefault();
-		
+	const getuser = async (currentLocation) => {
+		const token = localStorage.getItem('user');
+		await fetch(`${backend}/order`, {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				Authorization: 'bearer ' + token,
+			},
+			body: JSON.stringify({
+				currentLocation,
+			}),
+		});
+		// .then((rsp) => rsp.json())
+		// .then((data) => {
+		// 	if (data.error) {
+		// 		console.log('Data error ', data.error);
+		// 	} else {
+		// 	}
+		// })
+		// .catch((err) => {
+		// 	console.log('System error ', err);
+		// });
+	};
+	const Order = async (e) => {
+		let currentLocation = {};
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(
+				async (position) => {
+					const { latitude, longitude } = position.coords;
+					currentLocation = { latitude, longitude };
+					await getuser(currentLocation);
+				},
+				async (error) => {
+					console.log(error);
+					await getuser(currentLocation);
+				}
+			);
+		} else {
+			console.log('Geolocation is not supported by this browser.');
+		}
 	};
 	useEffect(() => {
 		setProd(props.props);

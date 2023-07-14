@@ -10,6 +10,8 @@ export default function UserProfile() {
 	const [conn, setConn] = useState(0);
 	const [onlineHawkers, setOnlineHawker] = useState([]);
 	const [storeHawkers, setStoreHawker] = useState([]);
+	const [itemfound, setItemFound] = useState([]);
+	const [items, setItems] = useState([]);
 	useEffect(() => {
 		const token = localStorage.getItem('user');
 		let currentLocation = {};
@@ -30,7 +32,7 @@ export default function UserProfile() {
 					if (data.error) {
 						console.log('Data error ', data.error);
 					} else {
-						// console.log(data);
+						console.log(data.onlineHawkers);
 						setOnlineHawker(data.onlineHawkers);
 						setStoreHawker(data.storeHawkers);
 						setConn(1);
@@ -65,8 +67,24 @@ export default function UserProfile() {
 		}
 		isLoggedin();
 	}, []);
-	const SearchItem = (e) => {
-		if (e.key == 'Enter') {
+	const SearchItem = async (e) => {
+		if (e == 'Enter' && write != undefined && write != '') {
+			console.log('1', write);
+			Object.entries(items).map(([key, value]) => {
+				// const s=value.product
+				const ind1 = value.product
+					.toLowerCase()
+					.indexOf(write.toLowerCase());
+				const ind2 = value.description
+					.toLowerCase()
+					.indexOf(write.toLowerCase());
+				if (ind1 > -1 || ind2 > -1) {
+					let arr = itemfound;
+					arr.push(value);
+					setItemFound(arr);
+					setItems(itemfound);
+				}
+			});
 			setSearch(write);
 		}
 	};
