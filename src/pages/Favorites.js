@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../components/UserProfileHeader';
 import { backend } from '../urlConfig';
+import Loading from '../components/Loading';
 import '../css/favorite.css';
 export default function Favorite() {
 	const [fav, setFav] = useState([]);
+	const [conn, setConn] = useState(0);
 	const token = localStorage.getItem('user');
 	useEffect(() => {
 		const fetchData = async () => {
@@ -21,6 +23,7 @@ export default function Favorite() {
 						console.log('Data error ', data.error);
 					} else {
 						setFav(data.favs);
+						setConn(1);
 					}
 				});
 		};
@@ -46,32 +49,36 @@ export default function Favorite() {
 			<Header />
 			<div className="row-display">
 				<h1>Favorites</h1>
-				<div className={'row odd-row'}>
-					<p
-						className="ind-row"
-						style={{ color: 'black' }}
-					>
-						Product
-					</p>
-					<p
-						className="ind-row-desc"
-						style={{ color: 'black' }}
-					>
-						Description
-					</p>
-					<p
-						className="ind-row-action"
-						style={{ color: 'black' }}
-					>
-						Price
-					</p>
-					<p
-						className="ind-row-action"
-						style={{ color: 'black' }}
-					>
-						Action
-					</p>
-				</div>
+				{conn === 0 ? (
+					<Loading />
+				) : (
+					<div className={'row odd-row'}>
+						<p
+							className="ind-row"
+							style={{ color: 'black' }}
+						>
+							Product
+						</p>
+						<p
+							className="ind-row-desc"
+							style={{ color: 'black' }}
+						>
+							Description
+						</p>
+						<p
+							className="ind-row-action"
+							style={{ color: 'black' }}
+						>
+							Price
+						</p>
+						<p
+							className="ind-row-action"
+							style={{ color: 'black' }}
+						>
+							Action
+						</p>
+					</div>
+				)}
 				{Object.entries(fav).map(([key, val]) => {
 					// console.log(key, val);
 					return (

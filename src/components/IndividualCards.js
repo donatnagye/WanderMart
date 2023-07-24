@@ -74,7 +74,7 @@ export default function IndividualCard(props) {
 				console.log(data);
 				if (data.error) {
 					console.log('Data error ', data.error);
-				}
+				} else window.location.reload();
 			})
 			.catch((err) => {
 				console.log('System error ', err);
