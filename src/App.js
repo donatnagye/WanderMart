@@ -14,6 +14,7 @@ import HawkerProfile from './pages/HawkerProfile';
 import HawkerEditProfile from './pages/HawkerEditProfile';
 import Inventory from './pages/HawkerInventory';
 import Verify from './pages/Verify';
+import Favorite from './pages/Favorites';
 export default function App() {
   return (
     <div className="App">
@@ -29,6 +30,7 @@ export default function App() {
           <Route path='/hawker/home' element={<HawkerProfile />} />
           <Route path='/hawker/edit/profile' element={<HawkerEditProfile />} />
           <Route path='/hawker/inventory' element={<Inventory />} />
+		  <Route path='/user/favorite' element={<Favorite/>}/>
         </Routes>
       </Router>
     </div>

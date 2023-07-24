@@ -1,0 +1,78 @@
+/* StylishRowDisplay.css */
+.row-display {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	width: 90%;
+	max-width: 1000px;
+	height: 100vh;
+	margin: 20px auto;
+	/* background-color: #ffffff; */
+	overflow-y: auto;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.row {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	padding: 10px 20px;
+	box-sizing: border-box;
+}
+
+.even-row {
+	background-color: #f0f0f0;
+	align-items: center;
+}
+
+.odd-row {
+	background-color: #e0e0e0;
+	align-items: center;
+}
+
+.cell {
+	flex: 1;
+	padding: 5px 10px;
+}
+
+.delete {
+	height: 30px;
+	margin: 2px;
+	width: 60px;
+	background-color: red;
+	color: white;
+	border: 2px solid red;
+	border-radius: 0.5em;
+}
+
+.delete:hover{
+	cursor: pointer;
+}
+.order-again:hover{
+	cursor: pointer;
+}
+
+.order-again {
+	height: 30px;
+	margin: 2px;
+	width: 60px;
+	background-color: green;
+	color: white;
+	border: 2px solid green;
+	border-radius: 0.5em;
+}
+
+.ind-row {
+	width: 100px;
+}
+.ind-row-action {
+	width: 110px;
+}
+
+.ind-row-desc {
+	width: 400px;
+	overflow-x: auto;
+	overflow-y: auto;
+	max-height: 50px;
+}

@@ -24,11 +24,13 @@ export default function Header() {
                 <Link to={'/'}><h1 class="title">WanderMart</h1></Link>
                 <div className='header-wrapper'>
                     <div className="Profile">
-                        <div className="menu-link">
-                            <img src={favourite} id="logo" />
-                        </div>
-                        <div className="menu-link">
-                            <img src={image} id="logo" onClick={Change} />
+                        <Link to={'/user/favorite'} className='link'>
+							<div className="menu-link" >
+                            	<img src={favourite} id="logo" />
+                        	</div>
+						</Link>
+                        <div className="menu-link" onClick={Change}>
+                            <img src={image} id="logo"/>
                         </div>
                     </div>
                     <div className="trans">

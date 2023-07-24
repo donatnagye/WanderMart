@@ -57,6 +57,29 @@ export default function IndividualCard(props) {
 			console.log('Geolocation is not supported by this browser.');
 		}
 	};
+	const AddFav = async (e) => {
+		e.preventDefault();
+		const token = localStorage.getItem('user');
+		await fetch(`${backend}/user/fav/add`, {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				Authorization: 'bearer ' + token,
+			},
+			body: JSON.stringify({ favorites: prod._id }),
+		})
+			.then((rsp) => rsp.json())
+			.then((data) => {
+				console.log(data);
+				if (data.error) {
+					console.log('Data error ', data.error);
+				}
+			})
+			.catch((err) => {
+				console.log('System error ', err);
+			});
+	};
 	useEffect(() => {
 		setProd(props.props);
 	}, []);
@@ -124,6 +147,7 @@ export default function IndividualCard(props) {
 								backgroundColor: 'yellow',
 								color: 'black',
 							}}
+							onClick={AddFav}
 						>
 							Add to favourite
 						</button>
