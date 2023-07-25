@@ -7,10 +7,35 @@ import img4 from '../images/adds/add4.jpeg';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import IndividualCard from './IndividualCards';
+import { backend } from '../urlConfig';
 export default function SuggestionCards(props) {
 	const [hawkers, setHawkers] = useState([]);
+	const [userName, setUserName] = useState();
 	const [items, setItems] = useState([]);
 	const [count, setCount] = useState(1);
+	useEffect(() => {
+		const token = localStorage.getItem('user');
+		const getUser = async () => {
+			try {
+				const rsp = await fetch(`${backend}/user/signed`, {
+					method: 'GET',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+						Authorization: 'bearer ' + token,
+					},
+				});
+				const data = await rsp.json();
+				setUserName(data.user.name);
+				// if (data.error) {
+				// 	console.log('Data error ', data.error);
+				// } else window.location.reload();
+			} catch (err) {
+				console.log('System error ', err);
+			}
+		};  
+		getUser(); // Call the function here
+	}, []);
 	useEffect(() => {
 		// console.log(props.prop);
 		setHawkers(props.prop);
@@ -22,7 +47,6 @@ export default function SuggestionCards(props) {
 			}
 			setItems(arr);
 		});
-		console.log(arr);
 	}, []);
 
 	var settings = {
@@ -74,7 +98,6 @@ export default function SuggestionCards(props) {
 
 	// Calculate the total number of pages
 	const totalPages = Math.ceil(len / itemsPerPage);
-	console.log(totalPages, count);
 
 	// State to keep track of the current page
 	const [currentPage, setCurrentPage] = useState(1);
@@ -92,7 +115,7 @@ export default function SuggestionCards(props) {
 					className="displayCards"
 					key={key2}
 				>
-					<IndividualCard props={val} />
+					<IndividualCard props={[val, userName]} />
 				</div>
 			);
 		});

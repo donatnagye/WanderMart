@@ -5,15 +5,25 @@ import { backend } from '../urlConfig';
 
 export default function IndividualCard(props) {
 	const [prod, setProd] = useState();
+	const [userName, setUserName] = useState();
 	const [isOpen, setIsOpen] = useState(false);
+	const [revOpen, setRevOpen] = useState(false);
 	const [cost, setCost] = useState(0);
 	const [count, setCount] = useState(0);
+	const [rating, setRating] = useState(Number(1));
+	const [reviewInd, setReviewInd] = useState();
 	const openPopup = (e) => {
 		setIsOpen(true);
+	};
+	const openReview = (e) => {
+		setRevOpen(true);
 	};
 
 	const closePopup = () => {
 		setIsOpen(false);
+	};
+	const closeReview = () => {
+		setRevOpen(false);
 	};
 	const getuser = async (currentLocation) => {
 		const token = localStorage.getItem('user');
@@ -71,7 +81,6 @@ export default function IndividualCard(props) {
 		})
 			.then((rsp) => rsp.json())
 			.then((data) => {
-				console.log(data);
 				if (data.error) {
 					console.log('Data error ', data.error);
 				} else window.location.reload();
@@ -81,9 +90,19 @@ export default function IndividualCard(props) {
 			});
 	};
 	useEffect(() => {
-		setProd(props.props);
-	}, []);
-	// console.log(prod);
+		const user = async () => {
+			setProd(props.props[0]);
+			setUserName(props.props[1]);
+		};
+		user();
+	}, [props.props]);
+	const AddReview = (e) => {
+		e.preventDefault();
+		openReview();
+		closePopup();
+		console.log('Add Review');
+	};
+	console.log(userName, prod);
 	return (
 		<div className="display-prod">
 			<div className="prod-img">
@@ -151,7 +170,48 @@ export default function IndividualCard(props) {
 						>
 							Add to favourite
 						</button>
-						<p>Cost : {cost} S</p>
+						<p>Cost : {cost}$</p>
+					</div>
+					<button onClick={AddReview}>Add Review</button>
+				</Modal>
+				<Modal
+					isOpen={revOpen}
+					className="modal-content-review"
+					onRequestClose={closeReview}
+					overlayClassName="modal-overlay"
+				>
+					<div className="review-heading">
+						<h1>Review</h1>
+					</div>
+					<p>Name: {userName}</p>
+					<div className="rating-div">
+						<p>Rating</p>
+						<input
+							type="number"
+							min={1}
+							max={5}
+							value={rating}
+							onChange={(e) => {
+								console.log(e.target.value);
+								if (e.target.value >= 1 && e.target.value <= 5)
+									setRating(e.target.value);
+							}}
+						></input>
+					</div>
+					<textarea
+						contentEditable
+						type="text"
+						value={reviewInd}
+						placeholder="Write a Review"
+						rows={10}
+						onChange={(e) => {
+							setReviewInd(e.target.value);
+						}}
+						style={{ resize: 'none', outline: 'none' }}
+						required={true}
+					></textarea>
+					<div className="review-submit">
+						<button>Submit</button>
 					</div>
 				</Modal>
 			</div>
