@@ -37,8 +37,6 @@ export default function UserSignIn() {
   }
   useEffect(() => {
     function isLoggedin() {
-      // localStorage.removeItem('user');
-      // console.log(localStorage.getItem('user'));
       if (localStorage.getItem('user')) {
         window.location = '/user/home';
         return;

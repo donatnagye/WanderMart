@@ -16,6 +16,7 @@ export default function ProfileCard() {
 	const [isOpen, setIsOpen] = useState(false);
 	const token = localStorage.getItem('hawker');
 	const [review, setReviews] = useState([]);
+	const [totRating, setTotRating] = useState(0);
 	const totalStars = 5;
 	const getStarIcon = (index, rating) => {
 		const starValue = index + 1;
@@ -72,6 +73,14 @@ export default function ProfileCard() {
 					}
 					// console.log(Object.entries(data));
 					let arr = [];
+					var rat = 0;
+					Object.entries(data).forEach(([key, value]) => {
+						// console.log(value);
+						rat = rat + value.rating;
+					});
+					rat = rat / Object.entries(data).length;
+					setTotRating(rat);
+					console.log('len ', data);
 					Object.entries(data)
 						.slice(-50)
 						.forEach(([key, value]) => {
@@ -178,7 +187,7 @@ export default function ProfileCard() {
 					<div className="rated-review">
 						<h3 style={{ margin: '10px' }}>Rating</h3>
 						<div className="rate">
-							<p style={{ margin: '5px' }}>3.75</p>{' '}
+							<p style={{ margin: '5px' }}>{totRating}</p>{' '}
 							<BsStarFill color="yellow" />
 						</div>
 					</div>
