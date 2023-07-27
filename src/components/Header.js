@@ -40,7 +40,7 @@ export default function Header() {
 	return (
 		<div className="Header">
 			<header>
-				<Link to={'/'}>
+				<Link to={'/'} id="wanderMart">
 					<h1 class="title">WanderMart</h1>
 				</Link>
 				<ul>

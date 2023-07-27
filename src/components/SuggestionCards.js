@@ -33,7 +33,7 @@ export default function SuggestionCards(props) {
 			} catch (err) {
 				console.log('System error ', err);
 			}
-		};  
+		};
 		getUser(); // Call the function here
 	}, []);
 	useEffect(() => {
@@ -43,6 +43,7 @@ export default function SuggestionCards(props) {
 		Object.entries(props.prop).map(([key, value]) => {
 			len += value?.Items.length;
 			for (let i = 0; i < value.Items.length; i++) {
+				value.Items[i]['hawker_id'] = value.id;
 				arr.push(value?.Items[i]);
 			}
 			setItems(arr);
@@ -110,6 +111,7 @@ export default function SuggestionCards(props) {
 	const entries = Object.entries(items)
 		?.slice(startIndex, endIndex)
 		.map(([key2, val]) => {
+			// console.log(val);
 			return (
 				<div
 					className="displayCards"

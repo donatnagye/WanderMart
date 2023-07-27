@@ -4,6 +4,8 @@ import Modal from 'react-modal';
 import { backend } from '../urlConfig';
 
 export default function IndividualCard(props) {
+	// console.log(props.props);
+	const hawker = props.props[0].hawker_id;
 	const [prod, setProd] = useState();
 	const [userName, setUserName] = useState();
 	const [isOpen, setIsOpen] = useState(false);
@@ -12,6 +14,8 @@ export default function IndividualCard(props) {
 	const [count, setCount] = useState(0);
 	const [rating, setRating] = useState(Number(1));
 	const [reviewInd, setReviewInd] = useState();
+	const token = localStorage.getItem('user');
+
 	const openPopup = (e) => {
 		setIsOpen(true);
 	};
@@ -26,7 +30,6 @@ export default function IndividualCard(props) {
 		setRevOpen(false);
 	};
 	const getuser = async (currentLocation) => {
-		const token = localStorage.getItem('user');
 		await fetch(`${backend}/order`, {
 			method: 'POST',
 			headers: {
@@ -36,18 +39,19 @@ export default function IndividualCard(props) {
 			},
 			body: JSON.stringify({
 				currentLocation,
+				hawker: props.props[0].hawker_id,
+				product: props.props[0]._id,
 			}),
-		});
-		// .then((rsp) => rsp.json())
-		// .then((data) => {
-		// 	if (data.error) {
-		// 		console.log('Data error ', data.error);
-		// 	} else {
-		// 	}
-		// })
-		// .catch((err) => {
-		// 	console.log('System error ', err);
-		// });
+		})
+			.then((rsp) => rsp.json())
+			.then((data) => {
+				if (data.error) {
+					console.log('Data error ', data.error);
+				}
+			})
+			.catch((err) => {
+				console.log('System error ', err);
+			});
 	};
 	const Order = async (e) => {
 		let currentLocation = {};
@@ -102,7 +106,20 @@ export default function IndividualCard(props) {
 		closePopup();
 		console.log('Add Review');
 	};
-	console.log(userName, prod);
+	const postReview = async (e) => {
+		e.preventDefault();
+		await fetch(`${backend}/hawker/postreview/` + { hawker }, {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				Authorization: 'bearer ' + token,
+			},
+			body: JSON.stringify({ userName, reviewInd, rating, hawker }),
+		}).then(() => {
+			window.location.reload();
+		});
+	};
 	return (
 		<div className="display-prod">
 			<div className="prod-img">
@@ -211,7 +228,7 @@ export default function IndividualCard(props) {
 						required={true}
 					></textarea>
 					<div className="review-submit">
-						<button>Submit</button>
+						<button onClick={postReview}>Submit</button>
 					</div>
 				</Modal>
 			</div>
