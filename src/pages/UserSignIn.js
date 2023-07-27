@@ -27,7 +27,6 @@ export default function UserSignIn() {
           console.log('Data error ', data.error);
         } else {
           localStorage.setItem("user", data.token);
-          console.log(localStorage.getItem("user"));
           window.location = '/user/home';
           return;
         }

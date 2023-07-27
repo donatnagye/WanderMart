@@ -75,7 +75,6 @@ export default function ProfileCard() {
 					let arr = [];
 					var rat = 0;
 					Object.entries(data).forEach(([key, value]) => {
-						// console.log(value);
 						rat = rat + value.rating;
 					});
 					rat = rat / Object.entries(data).length;
@@ -84,7 +83,6 @@ export default function ProfileCard() {
 					Object.entries(data)
 						.slice(-50)
 						.forEach(([key, value]) => {
-							// console.log(value);
 							arr.push({
 								rating: value.rating,
 								message: value.review,

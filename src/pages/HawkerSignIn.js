@@ -27,7 +27,6 @@ export default function HawkerSignIn() {
                     console.log('Data error ', data.error);
                 } else {
                     localStorage.setItem("hawker", data.token);
-                    console.log(localStorage.getItem("hawker"));
                     window.location = '/hawker/home';
                     return;
                 }
