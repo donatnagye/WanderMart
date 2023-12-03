@@ -342,7 +342,7 @@ export default function ProfileCard() {
 		if ((!product || !description || !price || !qty) && !file) {
 			return;
 		}
-		if (file) {
+		if (!file) {
 			let arr = [];
 			arr.push({ product, description, price, quantity: qty });
 			await fetch(`${backend}/hawker/addItem`, {
@@ -373,7 +373,7 @@ export default function ProfileCard() {
 		} else {
 			const reader = new FileReader();
 			reader.onload = async (e) => {
-				// console.log(e.target.result);
+				console.log(e.target.result);
 				await fetch(`${backend}/hawker/addItem`, {
 					method: 'POST',
 					headers: {
