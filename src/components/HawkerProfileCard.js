@@ -79,7 +79,6 @@ export default function ProfileCard() {
 					});
 					rat = rat / Object.entries(data).length;
 					setTotRating(rat);
-					console.log('len ', data);
 					Object.entries(data)
 						.slice(-50)
 						.forEach(([key, value]) => {
